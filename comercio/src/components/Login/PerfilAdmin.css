@@ -1,0 +1,28 @@
+.sidebar {
+    position: fixed;
+    top: 0.2vh;
+    bottom: 100vh;
+    right: 180vh;
+    min-height: 100vh;
+    z-index: 100;
+    padding:  auto;
+    box-shadow: inset -1px 0 0 rgba(235, 10, 10, 0.1);
+}
+#sidebar-wrapper{
+    min-height: 100vh !important;
+    width: 100vw;
+    margin-left: -1rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+}
