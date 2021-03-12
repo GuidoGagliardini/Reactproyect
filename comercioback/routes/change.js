@@ -17,7 +17,7 @@ const change = async (req,res,next)=>{
             console.log('ok');
             res.json({email: verify.email});
             await service.updatePassbyEmail(verify.email, sha1(repeatPassword));
-            
+                        
         }else {
             console.log('nook')
             res.send(false);
