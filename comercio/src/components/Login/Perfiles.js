@@ -10,17 +10,19 @@ const Perfiles = ( props ) => {
     const routerHistory = useHistory();
     const [jwtverify,setJwt] = useState();
     const [isFetching,setFetching] = useState(true);
-
-    useEffect(()=>{
-        const verifytoken  = async (e)=>{
+    const arrayUsers =[];
+    const verifytoken  = async (e)=>{
                 try {  
                     const token = sessionStorage.getItem('JWT');
-                    const result = await API.get(`auth/authuser/${token}`);
-                    setFetching(false)
-                    setJwt(result.data.datosUsers);
-                    console.log(result);
-                    if(result.data.datosUsers.estado === 1){
-                         routerHistory.push("/perfil/perfiladmin")
+                    const {data} = await API.get(`auth/authuser/${token}`);
+                    const datos = data.datosUsers;
+                    arrayUsers.push(datos);
+                    setFetching(false);
+                    console.log("DATOS",datos)
+                    if(datos.estado === 1){
+                        // sessionStorage.setItem("USUARIO", datosUsers.usuario);
+                        // sessionStorage.setItem("ID", datosUsers.id);
+                        routerHistory.push("/perfil/perfiladmin")
                         }   
                       else{
                         accesNot();
@@ -32,19 +34,14 @@ const Perfiles = ( props ) => {
                 }
         }
         
-        verifytoken();
-
-    },[]);
-    
-   
-   
-    
-
-    
-    
+    verifytoken();
+  
+    console.log(arrayUsers);
     return (<>
-        {isFetching && <Loading />}
-        {<PerfilAdmin usuarios={jwtverify} />}
+        {isFetching && <Loading /> ,
+        <PerfilAdmin usuarios = {arrayUsers}/>
+        }
+    
        
     </>
         )

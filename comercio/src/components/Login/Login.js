@@ -8,7 +8,7 @@ import {  NavLink } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import {loginNot}  from './../../services/useSweetAlert';
-import Perfiles from './Perfiles';
+
 
 /** Aca estoy mezclando StyledComponents con React Boostrap, averiguar como centrar ese div del demonio  */
 // const Container =styled.div`
@@ -33,7 +33,8 @@ const Login = () => {
     const pruebaLogin = async (e) => {
         
         console.log('enter de Ingresar');
-        const result = await API.post("/auth" , value);   
+        const result = await API.post("/auth" , value);  
+        console.log(result.data)
         if (result.data === false) {
             loginNot();
             setValue({

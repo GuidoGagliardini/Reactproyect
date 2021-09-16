@@ -6,40 +6,43 @@ const jwt =  require ('jsonwebtoken');
 const fs  = require ('fs');
 const { decode } = require('querystring');
 const { doesNotMatch } = require('assert');
-const e = require('express');
+
 
 
 const auth = async(req,res,next)=>{
-        try{
-                // const {data} = req.body;
+        try { 
                 const {email,password}= req.body;
                 const result =  await authModel.auth(email, sha1(password));
-                const {id,usuario,estado,activado} = result[0];
+                const {id,usuario,estado,activado} = result;
                 console.log(result)
-                if (id&&usuario){
-                        const privateKey = fs.readFileSync('./utils/keys/private.pem');
-                        const payload = {usuario,estado,id,activado};
-                        const signOptions = {expiresIn:'1h',algorithm:'RS256'};
-                        const JWT = jwt.sign(payload,privateKey,signOptions);
-                        res.json({JWT : JWT});
-                }else {
-                        res.send(false);
-                        
-                } 
-                //averiguar porque no puedo usar los operadores ternarios
-        }catch(error){
-           res.send(false)
+        if (result.length>0){
+                console.log("DATOS DE USUARIO",result);
+                const privateKey = fs.readFileSync('./utils/keys/private.pem');
+                const payload = {usuario,estado,id,activado};
+                const signOptions = {expiresIn:'1h',algorithm:'RS256'};
+                const JWT = jwt.sign(payload,privateKey,signOptions);
+                res.json({JWT : JWT});
+
+        }else{
+                console.log("ERROR EN PASSWORD O MAIL");
+                res.send(false)
         }
+                
+        } catch (error) {
+                res.sendStatus(500);
+        }
+               
 };
 const authuser = async (req,res,next)=>{
  const {token} = req.params;
  if (token) {
         const publicKey = fs.readFileSync('./utils/keys/public.pem');
-        const {usuario,estado,id,activado} = jwt.verify(token,publicKey);
-        if (jwt.verify===jwt.JsonWebTokenError){
+        const {usuario,id,estado,activado} = jwt.decode(token,publicKey);
+       
+        if (jwt.decode===jwt.JsonWebTokenError){
                 res.send({message:"NO AUTORIZADO"})
         }
-        if (jwt.verify===jwt.TokenExpiredError){
+        if (jwt.decode===jwt.TokenExpiredError){
                 res.send({message:"TokenExpired"})
         }else {
                 res.json({datosUsers : {usuario,estado,id,activado}});

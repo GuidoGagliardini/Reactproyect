@@ -1,6 +1,6 @@
 
 import {BrowserRouter as Router , Route, Switch} from 'react-router-dom';
-import {lazy,Suspense, useState} from 'react';
+import { useState} from 'react'; // usar lazy suspense
 import NavbarComponent from './components/common/NavbarComponent';
 import Home from './components/Home/Home';
 import Graficos from './components/Graficos';

@@ -1,36 +1,97 @@
-import React, { useState,useEffect } from 'react';
-import {Nav} from 'react-bootstrap';
-import './PerfilAdmin.css'
+import React, {useEffect, useState } from 'react';
+import {Nav, NavLink} from 'react-bootstrap';
+import {Navigation} from 'react-minimal-side-navigation';
+import { useHistory, useLocation } from "react-router-dom";
+import Icon from "awesome-react-icons";
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+
 
 // import './PerfilAdmin.css'
-const PerfilAdmin = ({handle}) => {
-console.log(handle)
+const PerfilAdmin = ({handle,usuarios}) => {
+  const [datos, setDatos] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const history = useHistory();
+  const location = useLocation();
+  console.log(usuarios)
+/**FooterOut */
 useEffect(()=>{
   const footer = async ()=>{
       try {
-        handle(false)
+        handle(false);
         
       } catch (error) {
           console.log(error)
-      }
+        }
+        return ()=> handle(true);
   }
+  const cargaDatos =  ()=>{
+    setDatos(usuarios);
+  }
+  cargaDatos();
   footer();
-  return ()=> handle(true);
+},[handle]);
+/**EndFooterOut */
+/***PODER USAR LAS PROPS PARA RENDERIZAR EL NOMBRE DE USUARIO Y LOS DATOS DEL USUARIO NO USAR
+ * SESSIONSTORAGE 
+ */
+console.log(usuarios)
 
-},[handle])
-    //Construir un sistema de Logout automatico cuando se caduque el token o reiniciar el token
-  
     return (<>
-           
-            <Nav className="col-md-12 d-none d-md-block bg-dark sidebar" >
-         
-            <Nav.Item >
-                <Nav.Link className="text-color-white" > Link1 </Nav.Link>
-            </Nav.Item>
+   
+      <div className="row pt-2 " >
+        <div  className="col-4 ">
 
-            </Nav>
-    
-        
+<Navigation
+  activeItemId={location.pathname}
+  onSelect={({ itemId }) => {
+    history.push(itemId);
+  }}
+  
+  items={[
+    {
+      title:`Usuarios`,
+      elemBefore : ()=><Icon name="user" />
+    },
+    {
+      title: "Link1",
+      itemId: "/home",
+      elemBefore: () => <Icon name="coffee" />
+    },
+    {
+      title: "Link2",
+      itemId: "/about",
+      elemBefore: () => <Icon name="user" />,
+    },
+    {
+      title: "Link3",
+      itemId: "/another",
+      elemBefore: () => <Icon name="star" />
+    }
+  ]}
+/>
+
+
+ </div>
+ <div className="">
+ 
+  <Navigation
+    activeItemId={location.pathname}
+    items={[
+      {
+        title: "Configuracion",
+        itemId: "/settings",
+        elemBefore: () => <Icon name="activity" />
+      }
+    ]}
+    onSelect={({ itemId }) => {
+      history.push(itemId);
+    }}
+  />
+
+
+ </div>
+  </div>
+
     </>  );
 }
  

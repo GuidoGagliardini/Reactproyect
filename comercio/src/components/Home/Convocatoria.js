@@ -1,13 +1,13 @@
 import React,{useState} from 'react';
 import  {useParams,Link} from 'react-router-dom';
 import useGet from './../../services/useHTTP';
-import {Container,Row,Col,Card,Modal,Image,Button} from 'react-bootstrap';
+import {Container,Row,Col,Modal,Image,Button} from 'react-bootstrap';
 import Loading from './../common/Loading';
 
-const Convocatoria = ({}) => {
+const Convocatoria = () => {
     const {id} = useParams();
     const [data,isFetching,error] = useGet({url:`https://www.cultura.gob.ar/api/v2.0/convocatorias/${id}`})
-    const {bajada,cuerpo,documentos,link,titulo,imagen} = data;
+    const {bajada,cuerpo,titulo,imagen} = data;
 
     const [show, setShow] = useState(false);
 
@@ -18,6 +18,7 @@ const Convocatoria = ({}) => {
     const handleShow = () => setShow(true);
     return ( <>
     {isFetching && <Loading />}
+    {error && <Loading />}
     <Container  >
     <h1>{titulo}</h1>
         <Row   >
