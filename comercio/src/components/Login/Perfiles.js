@@ -18,7 +18,7 @@ const Perfiles = ( props ) => {
                     const datos = data.datosUsers;
                     arrayUsers.push(datos);
                     setFetching(false);
-                    console.log("DATOS",datos)
+                    console.log("DATOS",data)
                     if(datos.estado === 1){
                         // sessionStorage.setItem("USUARIO", datosUsers.usuario);
                         // sessionStorage.setItem("ID", datosUsers.id);
