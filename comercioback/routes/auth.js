@@ -19,8 +19,9 @@ const auth = async(req,res,next)=>{
                 console.log("DATOS DE USUARIO",result);
                 const privateKey = fs.readFileSync('./utils/keys/private.pem');
                 const payload = {usuario,estado,id,activado};
-                const signOptions = {expiresIn:'1h',algorithm:'RS256'};
+                const signOptions = {expiresIn:'1h',algorithm:"HS256"};
                 const JWT = jwt.sign(payload,privateKey,signOptions);
+                console.log("JWT",JWT)
                 res.json({JWT : JWT});
 
         }else{
@@ -34,23 +35,22 @@ const auth = async(req,res,next)=>{
                
 };
 const authuser = async (req,res,next)=>{
- const {token} = req.params;
- if (token) {
+try {
+        const {token} = req.params;
+        if (token) {
         const publicKey = fs.readFileSync('./utils/keys/public.pem');
-        const {usuario,id,estado,activado} = jwt.decode(token,publicKey);
-       
-        if (jwt.decode===jwt.JsonWebTokenError){
-                res.send({message:"NO AUTORIZADO"})
-        }
-        if (jwt.decode===jwt.TokenExpiredError){
-                res.send({message:"TokenExpired"})
+        const  datos = jwt.verify(token,publicKey);
+        console.log(datos.payload);
+        res.json({datosUsers : {datos}});
+        
         }else {
-                res.json({datosUsers : {usuario,estado,id,activado}});
-        }
- }else {
         console.log("NO TOKEN")
         res.send({message:"Error en Verificacion de TOKEN"});
- }
+        }
+} catch (error) {
+        console.log(error)
+        }
+ 
 /** jwt.TokenExpired tira un error que tendria que mostrar para cerrar la session. */
 
 }
