@@ -12,6 +12,7 @@ const { doesNotMatch } = require('assert');
 const auth = async(req,res,next)=>{
         try { 
                 const {email,password}= req.body;
+                console.log(req.body)
                 const result =  await authModel.auth(email, sha1(password));
                 const {id,usuario,estado,activado} = result;
                 console.log(result)
