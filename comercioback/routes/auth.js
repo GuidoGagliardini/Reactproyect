@@ -39,7 +39,7 @@ const authuser = async (req,res,next)=>{
  if (token) {
         const publicKey = fs.readFileSync('./utils/keys/public.pem');
         const {usuario,id,estado,activado} = jwt.decode(token,publicKey);
-       
+        console.log(jwt.decode(token,publicKey))
         if (jwt.decode===jwt.JsonWebTokenError){
                 res.send({message:"NO AUTORIZADO"})
         }

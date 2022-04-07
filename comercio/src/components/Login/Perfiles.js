@@ -16,6 +16,7 @@ const Perfiles = ( props ) => {
                     const token = sessionStorage.getItem('JWT');
                     const {data} = await API.get(`auth/authuser/${token}`);
                     const datos = data.datosUsers;
+                    console.log(data)
                     arrayUsers.push(datos);
                     setFetching(false);
                     console.log("DATOS",datos)
@@ -38,7 +39,7 @@ const Perfiles = ( props ) => {
   
     console.log(arrayUsers);
     return (<>
-        {isFetching && <Loading /> ,
+        {isFetching && <Loading />  ? null :
         <PerfilAdmin usuarios = {arrayUsers}/>
         }
     
