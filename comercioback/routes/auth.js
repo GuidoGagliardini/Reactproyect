@@ -4,23 +4,18 @@ const authModel =  require('./../models/auth');
 const sha1 = require ('sha1');
 const jwt =  require ('jsonwebtoken');
 const fs  = require ('fs');
-const { decode } = require('querystring');
-const { doesNotMatch } = require('assert');
+
 
 
 
 const auth = async(req,res,next)=>{
         try { 
                 const {email,password}= req.body;
-                console.log(req.body)
                 const result =  await authModel.auth(email, sha1(password));
-                const {id,usuario,estado,activado} = result;
-                console.log(result)
         if (result.length>0){
-                console.log("DATOS DE USUARIO",result);
+                const payload = {...result}
                 const privateKey = fs.readFileSync('./utils/keys/private.pem');
-                const payload = {usuario,estado,id,activado};
-                const signOptions = {expiresIn:'1h',algorithm:"HS256"};
+                const signOptions = {expiresIn:'1h',algorithm:"RS256"};
                 const JWT = jwt.sign(payload,privateKey,signOptions);
                 console.log("JWT",JWT)
                 res.json({JWT : JWT});
@@ -31,7 +26,8 @@ const auth = async(req,res,next)=>{
         }
                 
         } catch (error) {
-                res.sendStatus(500);
+                res.json({error:true});
+                
         }
                
 };
@@ -41,8 +37,8 @@ try {
         if (token) {
         const publicKey = fs.readFileSync('./utils/keys/public.pem');
         const  datos = jwt.verify(token,publicKey);
-        console.log(datos.payload);
-        res.json({datosUsers : {datos}});
+        console.log("DATOS", {...datos});
+        res.json({datosUsers : datos});
         
         }else {
         console.log("NO TOKEN")
@@ -50,6 +46,7 @@ try {
         }
 } catch (error) {
         console.log(error)
+        res.json({error:"Error al verif Token"})
         }
  
 /** jwt.TokenExpired tira un error que tendria que mostrar para cerrar la session. */
