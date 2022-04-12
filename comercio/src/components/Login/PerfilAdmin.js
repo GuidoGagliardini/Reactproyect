@@ -17,7 +17,7 @@ const PerfilAdmin = ({handle,usuarios}) => {
 useEffect(()=>{
   const footer = async ()=>{
       try {
-        handle(false);
+        handle(true);
         
       } catch (error) {
           console.log(error)

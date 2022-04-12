@@ -13,14 +13,12 @@ const Perfiles = ( props ) => {
     const arrayUsers =[];
     const verifytoken  = async (e)=>{
                 try {  
+                    
                     const token = sessionStorage.getItem('JWT');
                     const {data} = await API.get(`auth/authuser/${token}`);
-                    const datos = data.datosUsers;
-                    console.log(data)
-                    arrayUsers.push(datos);
+                    arrayUsers.push(data);
                     setFetching(false);
-                    console.log("DATOS",data)
-                    if(datos.estado === 1){
+                    if(data.datosUsers[0].estado === 1){
                         // sessionStorage.setItem("USUARIO", datosUsers.usuario);
                         // sessionStorage.setItem("ID", datosUsers.id);
                         routerHistory.push("/perfil/perfiladmin")
@@ -36,8 +34,6 @@ const Perfiles = ( props ) => {
         }
         
     verifytoken();
-  
-    console.log(arrayUsers);
     return (<>
         {isFetching && <Loading />  ? null :
         <PerfilAdmin usuarios = {arrayUsers}/>
