@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useGet from './../../services/useHTTP';
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import Loading from './../common/Loading';
 import AXIOS from 'axios';
 import {Container} from 'react-bootstrap';
-import {useHistory} from 'react-router-dom'
+
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBRow } from 'mdbreact';
 const Home = () => {
   
@@ -40,8 +40,9 @@ const Home = () => {
        <MDBBtn className="text-center" onClick={Anterior}>Anterior</MDBBtn>
         <MDBBtn onClick={Siguiente}> Siguiente</MDBBtn>
       </div>
+        {isFetching & error  ? <Loading /> : 
       <MDBRow  className="justify-content-center">
-        {isFetching && <Loading />}
+        
         {info?.map(({imagen,id,titulo,documentos,fecha_inicio,fecha_fin,estado}) =>(
                   
          <MDBCol className="justify-content-center" key={id} size="4" >
@@ -68,8 +69,11 @@ const Home = () => {
                   </MDBCard> 
                   </MDBCol>
       ))}
-
+        
+        
       </MDBRow>
+        }
+
     </Container>
     
     </> );

@@ -1,18 +1,18 @@
-import React, {useEffect, useState } from 'react';
-import {Nav, NavLink} from 'react-bootstrap';
-import {Navigation} from 'react-minimal-side-navigation';
-import { useHistory, useLocation } from "react-router-dom";
-import Icon from "awesome-react-icons";
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import React, {useContext, useEffect, useState } from 'react';
+import {Nav, NavLink, Container} from 'react-bootstrap';
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import {perfilesContext} from './Perfiles';
+import Sidebar from './Sidebar';
 
 
 // import './PerfilAdmin.css'
-const PerfilAdmin = ({handle,usuarios}) => {
+const PerfilAdmin = ({handle,props}) => {
   const [datos, setDatos] = useState({});
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
   const history = useHistory();
   const location = useLocation();
-  console.log(usuarios)
+  const usuario = useContext(perfilesContext);
 /**FooterOut */
 useEffect(()=>{
   const footer = async ()=>{
@@ -25,7 +25,7 @@ useEffect(()=>{
         return ()=> handle(true);
   }
   const cargaDatos =  ()=>{
-    setDatos(usuarios);
+    setDatos(props);
   }
   cargaDatos();
   footer();
@@ -34,63 +34,25 @@ useEffect(()=>{
 /***PODER USAR LAS PROPS PARA RENDERIZAR EL NOMBRE DE USUARIO Y LOS DATOS DEL USUARIO NO USAR
  * SESSIONSTORAGE 
  */
-console.log(usuarios)
-
+const toggleSidebar  = () =>{
+  setShowSidebar((prev) => !prev);
+}
     return (<>
-   
-      <div className="row pt-2 " >
-        <div  className="col-4 ">
-
-<Navigation
-  activeItemId={location.pathname}
-  onSelect={({ itemId }) => {
-    history.push(itemId);
-  }}
-  
-  items={[
-    {
-      title:`Usuarios`,
-      elemBefore : ()=><Icon name="user" />
-    },
-    {
-      title: "Link1",
-      itemId: "/home",
-      elemBefore: () => <Icon name="coffee" />
-    },
-    {
-      title: "Link2",
-      itemId: "/about",
-      elemBefore: () => <Icon name="user" />,
-    },
-    {
-      title: "Link3",
-      itemId: "/another",
-      elemBefore: () => <Icon name="star" />
-    }
-  ]}
-/>
-
-
- </div>
- <div className="">
- 
-  <Navigation
-    activeItemId={location.pathname}
-    items={[
-      {
-        title: "Configuracion",
-        itemId: "/settings",
-        elemBefore: () => <Icon name="activity" />
-      }
-    ]}
-    onSelect={({ itemId }) => {
-      history.push(itemId);
-    }}
-  />
-
-
- </div>
-  </div>
+      <Container className="header-container sticky-top bg-white p-0" fluid >
+        {!showSidebar ? (
+          <AiOutlineMenu
+            onClick={toggleSidebar}
+            className="header-menu-icon mx-4"
+          />
+        ) : (
+          <AiOutlineClose
+            onClick={toggleSidebar}
+            className="header-menu-icon mx-4"
+          />
+        )}
+        <Link to={'/'}><img className="header-logo ms-2 me-auto" /**src={logo} */ alt="Logo de la organización" /></Link>
+      </Container>
+      <Sidebar show={showSidebar} close={toggleSidebar} />
 
     </>  );
 }

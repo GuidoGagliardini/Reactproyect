@@ -5,22 +5,21 @@ import API from './../../api';
 import PerfilAdmin from './PerfilAdmin';
 import {accesNot} from './../../services/useSweetAlert';
 
-const Perfiles = ( props ) => {
- 
+export const perfilesContext = React.createContext({});
+const Perfiles = ( algo ) => {
     const routerHistory = useHistory();
     const [jwtverify,setJwt] = useState();
     const [isFetching,setFetching] = useState(true);
     const arrayUsers =[];
     const verifytoken  = async (e)=>{
                 try {  
-                    
                     const token = sessionStorage.getItem('JWT');
                     const {data} = await API.get(`auth/authuser/${token}`);
                     arrayUsers.push(data);
                     setFetching(false);
+                   
                     if(data.datosUsers[0].estado === 1){
-                        // sessionStorage.setItem("USUARIO", datosUsers.usuario);
-                        // sessionStorage.setItem("ID", datosUsers.id);
+                        sessionStorage.setItem("Usuario",arrayUsers[0].datosUsers[0].usuario)
                         routerHistory.push("/perfil/perfiladmin")
                         }   
                       else{
@@ -29,14 +28,19 @@ const Perfiles = ( props ) => {
     
                     }
                 } catch (error) {
-                    console.error()
+                    console.error(error)
                 }
         }
         
-    verifytoken();
+
+    useEffect(()=>{
+        verifytoken();
+    },[arrayUsers])
+  
     return (<>
+    
         {isFetching && <Loading />  ? null :
-        <PerfilAdmin usuarios = {arrayUsers}/>
+       ""
         }
     
        
