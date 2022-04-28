@@ -13,6 +13,7 @@ const auth = async(req,res,next)=>{
                 const {email,password}= req.body;
                 const result =  await authModel.auth(email, sha1(password));
         if (result.length>0){
+                console.log(result[0])
                 const payload = {...result}
                 const privateKey = fs.readFileSync('./utils/keys/private.pem');
                 const signOptions = {expiresIn:'1h',algorithm:"RS256"};
