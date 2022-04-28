@@ -1,5 +1,5 @@
 
-import {BrowserRouter as Router , Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router , Route, Routes} from 'react-router-dom';
 import { useState} from 'react'; // usar lazy suspense
 import NavbarComponent from './components/common/NavbarComponent';
 import Home from './components/Home/Home';
@@ -28,7 +28,7 @@ const [footerFlag, setFooterFlag] = useState(true);
     
     <Router>
     <NavbarComponent />
-    <Switch>
+    <Routes>
     <Route path="/" exact component={Home} />
     <Route path="/home" exact component={Home} />
     <Route path="/convocatoria/:id" component={Convocatoria} />
@@ -43,7 +43,7 @@ const [footerFlag, setFooterFlag] = useState(true);
     <Route path="/perfil/perfiladmin"  render={(props)=>{
       return <PerfilAdmin  {...props} handle={setFooterFlag} />
     }}  /> 
-    </Switch>
+    </Routes>
        
     {/* siempre a la raiz se le pone el exact(es un boolean) siempre ponerle el exact 
     a los /algo/alguito (ahi llevaria el exact el /algo) */}

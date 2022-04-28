@@ -5,7 +5,7 @@ import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import API from './../../api';
 import {  NavLink } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import {loginNot}  from './../../services/useSweetAlert';
 
@@ -24,7 +24,7 @@ const schema = yup.object().shape({
 const Login = () => {
     const [jsontoken,setJsontoken] =useState([]);
     
-    const routerHistory = useHistory();
+    const routerHistory = useNavigate();
     const [value,handler,setValue] = useCustomForm();
     const {registrer,handleSubmit,errors} = useForm({
         resolvers: yupResolver(schema)
