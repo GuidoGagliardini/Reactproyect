@@ -13,16 +13,16 @@ const NavbarComponent = () => {
  
   <Navbar bg="light" expand="lg">
   <NavbarBrand>
-  <NavLink to="/home"  activeStyle={{color:"tomato"}}>Api Gobierno</NavLink>
+  <NavLink to="/home"  activestyle={{color:"tomato"}}>Api Gobierno</NavLink>
   </NavbarBrand>
 
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto" >
-      <NavLink className="mr-2" exact to="/graficos" activeStyle={{color:"tomato"}}>Graficos</NavLink> 
-      <NavLink className="mr-2" exact to="/pokemones" activeStyle={{color:"tomato"}}>Pokemones</NavLink>   
-      <NavLink to="/login" activeStyle={{color:"tomato"}}>Login</NavLink>    
+      <NavLink className="mr-2"  to="/graficos" activestyle={{color:"tomato"}}>Graficos</NavLink> 
+      <NavLink className="mr-2"  to="/pokemones" activestyle={{color:"tomato"}}>Pokemones</NavLink>   
+      <NavLink to="/login" activestyle={{color:"tomato"}}>Login</NavLink>    
     </Nav>
-    <Form inline>
+    <Form >
       <FormControl type="text" placeholder="..." className="mr-sm-2" />
       <Button variant="outline-success">Buscar</Button>
     </Form>

@@ -4,11 +4,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import App from '../../App';
 
 const FooterComponent = ({footerflag}) => {
-  const [isOn,setIsOn] = useState(true)
   
-
- 
-
     return ( <>
     { footerflag ?  
 

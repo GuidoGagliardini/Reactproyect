@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // npm i chart.js
-import Chart from "chart.js";
+import Chart from "chart.js/auto";
+
 const Plantilla = () => {
   const cr = React.createRef();
   useEffect(() => {
@@ -40,7 +41,7 @@ const Plantilla = () => {
         },
       },
     });
-  });
+  },[]);
 
   return <canvas ref={cr} width="300px" height="100vh"></canvas>;
 };

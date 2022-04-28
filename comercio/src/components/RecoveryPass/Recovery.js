@@ -18,7 +18,7 @@ const emailSchema = yup.object().shape({
     email : yup.string().required("Campo Obligatorio").email("Ingrese un email valido")
 })
 const Recovery = () => {
-    const routerHistory = useHistory();
+    const routerHistory = useNavigate();
     const [value,handler,setValue] = useCustomForm();
     const {registrer,handleSubmit,errors} = useForm({
         resolvers:yupResolver(emailSchema)
@@ -59,7 +59,7 @@ const Recovery = () => {
 
 
 export const Change =()=>{
-    const routerHistory = useHistory()
+    const routerHistory = useNavigate()
     const [value,handler,setValue] = useCustomForm();
     const {registrer,handleSubmit,errors} = useForm({
         resolvers: yupResolver(schemaPass)

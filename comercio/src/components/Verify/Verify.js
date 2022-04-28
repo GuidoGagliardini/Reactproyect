@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {verifyok,verifyNo} from './../../services/useSweetAlert';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import API from './../../api';
 import Loading from './../common/Loading';
 
@@ -11,7 +11,7 @@ import Loading from './../common/Loading';
 
 const Verify = () => {
     const {verify_code,email} = useParams();
-    const routerHistory = useHistory()
+    const routerHistory = useNavigate()
 
     const verificacion = async ()=>{
          

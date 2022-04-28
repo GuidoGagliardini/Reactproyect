@@ -4,7 +4,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useCustomForm from './../../services/useCustomForm';
 import {alertRegistro, verifyNo} from './../../services/useSweetAlert';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import API from './../../api';
 
 
@@ -15,7 +15,7 @@ const schema = yup.object().shape({
     email : yup.string().email("Mail invalido").required("obligatorio")
 });
 const Registro = () => {
-const routerHistory = useHistory();
+const routerHistory = useNavigate();
 const [value,handler,setValues] = useCustomForm();
 const {register,handleSubmit,errors} = useForm({
     resolver: yupResolver(schema),

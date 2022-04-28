@@ -15,7 +15,7 @@ const Pokemones = () => {
       }else {
         console.log("ERROR")
       }
-    })
+    },[])
     const nextPage  = async () =>{
       const result = await API.get(next);
       const pagina = result.data.results
@@ -40,7 +40,7 @@ const Pokemones = () => {
                     <Card.Title>
                     {name}  
                     </Card.Title>
-                    <Button variant="primary" block>
+                    <Button variant="primary">
                       <Link className="text-white" to={url}>
                         Ver
                       </Link>

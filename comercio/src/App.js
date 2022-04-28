@@ -29,17 +29,17 @@ const [footerFlag, setFooterFlag] = useState(true);
     <Router>
     <NavbarComponent />
     <Routes>
-    <Route path="/" exact component={Home} />
-    <Route path="/home" exact component={Home} />
-    <Route path="/convocatoria/:id" component={Convocatoria} />
-    <Route path="/pokemones"  exact component={Pokemones} />
-    <Route path="/graficos"  exact component={Graficos} />
-    <Route path="/login"  exact component={Login}  />
-    <Route path="/registro" exact  component={Registro} />
-    <Route path="/verify/:verify_code/:email" exact component={Verify} />
-    <Route path="/recovery" exact  component={Recovery} />
-    <Route path="/change/:token" exact component={Change} />
-    <Route path="/perfiles" exact component={Perfiles} />
+    <Route path="/"  element={<Home />} />
+    <Route path="/home"   element={<Home />} />
+    <Route path="/convocatoria/:id" element={<Convocatoria />} />
+    <Route path="/pokemones"    element={<Pokemones />} />
+    <Route path="/graficos"    element={<Graficos />} />
+    <Route path="/login"    element={<Login />}  />
+    <Route path="/registro"    element={<Registro />} />
+    <Route path="/verify/:verify_code/:email"   element={<Verify />} />
+    <Route path="/recovery"    element={<Recovery />} />
+    <Route path="/change/:token"   element={<Change />} />
+    <Route path="/perfiles"   element={<Perfiles />} />
     <Route path="/perfil/perfiladmin"  render={(props)=>{
       return <PerfilAdmin  {...props} handle={setFooterFlag} />
     }}  /> 
