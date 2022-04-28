@@ -7,7 +7,7 @@ import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
 import Loading from './../common/Loading';
 import {noMail,mailOk,recoveryOk, noRecovery,tokenError} from './../../services/useSweetAlert';
-import { useHistory,useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
 
 const schemaPass = yup.object().shape({

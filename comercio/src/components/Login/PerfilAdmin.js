@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState } from 'react';
 import {Nav, NavLink, Container} from 'react-bootstrap';
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import {perfilesContext} from './Perfiles';
 import Sidebar from './Sidebar';
@@ -10,7 +10,7 @@ import Sidebar from './Sidebar';
 const PerfilAdmin = ({handle,props}) => {
   const [datos, setDatos] = useState({});
   const [showSidebar, setShowSidebar] = useState(false);
-  const history = useHistory();
+  const history = useNavigate();
   const location = useLocation();
   const usuario = useContext(perfilesContext);
 /**FooterOut */

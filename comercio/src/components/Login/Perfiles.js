@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Loading from './../common/Loading';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import API from './../../api';
 import PerfilAdmin from './PerfilAdmin';
 import {accesNot} from './../../services/useSweetAlert';
 
 export const perfilesContext = React.createContext({});
 const Perfiles = ( algo ) => {
-    const routerHistory = useHistory();
+    const routerHistory = useNavigate();
     const [jwtverify,setJwt] = useState();
     const [isFetching,setFetching] = useState(true);
     const arrayUsers =[];
