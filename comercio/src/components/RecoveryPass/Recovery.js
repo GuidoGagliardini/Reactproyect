@@ -26,7 +26,7 @@ const Recovery = () => {
     const recoverySend = async (e)=>{
         console.log("boton de recovery")
         const result = await API.post('/recovery',value);
-        <Loading />
+        // <Loading />
         // result.data === false ? noMail() : mailOk();
         if (result.data === false){
             noMail();

@@ -34,7 +34,7 @@ const Login = () => {
         
         console.log('enter de Ingresar');
         const result = await API.post("/auth" , value);  
-        console.log(result.data)
+        
         if (result.data === false) {
             loginNot();
             setValue({
@@ -45,7 +45,7 @@ const Login = () => {
             const {JWT} = result.data;
             JWT ? sessionStorage.setItem('JWT', JWT) : console.log("NOJWT");
             setJsontoken(JWT);
-            routerHistory.push('/perfiles'); 
+            routerHistory('/perfiles'); 
         }
         
     }
@@ -62,7 +62,7 @@ const Login = () => {
                <MDBInput value = {value.email || ""}ref={registrer} label="Email" success="right" icon="envelope" group type="email" onChange={handler} name="email" required />
                <MDBInput value={value.password || ""} group type="password" ref ={registrer} label="Password"  icon="lock" onChange={handler} name="password" required /> 
                
-               <label className="text-danger">{errors.password?.message}</label>
+               <label className="text-danger">{errors?.password?.message}</label>
             </div>
             <div className="text-center">
                 <MDBBtn   type="submit"  > Ingresar </MDBBtn>  

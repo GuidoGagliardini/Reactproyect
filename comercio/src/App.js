@@ -1,3 +1,4 @@
+import React from 'react';
 
 import {BrowserRouter as Router , Route, Routes} from 'react-router-dom';
 import { useState} from 'react'; // usar lazy suspense
@@ -11,8 +12,6 @@ import Login from './components/Login/Login';
 import Registro from './components/Registro';
 import Verify from './components/Verify';
 import FooterComponent from './components/common/FooterComponent';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import Recovery from './components/RecoveryPass';
 import { Change } from './components/RecoveryPass/Recovery';

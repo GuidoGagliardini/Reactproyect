@@ -20,11 +20,11 @@ const Perfiles = ( algo ) => {
                    
                     if(data.datosUsers[0].estado === 1){
                         sessionStorage.setItem("Usuario",arrayUsers[0].datosUsers[0].usuario)
-                        routerHistory.push("/perfil/perfiladmin")
+                        routerHistory("/perfil/perfiladmin")
                         }   
                       else{
                         accesNot();
-                        routerHistory.push('/login')
+                        routerHistory('/login')
     
                     }
                 } catch (error) {

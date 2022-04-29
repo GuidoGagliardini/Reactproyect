@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useEffect, useState } from 'react';
 import useGet from './../../services/useHTTP';
 import { Link } from "react-router-dom";
@@ -11,7 +13,7 @@ const Home = () => {
   
   const [data,isFetching,error] = useGet({url:"https://www.cultura.gob.ar/api/v2.0/convocatorias/"});
   const [info,setInfo] = useState();
-  const [previousPage,setPreviousPage] = useState();
+  const [previousPage,setPreviousPage] = useState([]);
   const {results,next,previous} = data;
  
   useEffect(()=>{
