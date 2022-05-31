@@ -9,7 +9,7 @@ const Plantilla = () => {
     var myChart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["CPU", "MEMORIA", "USO INTERNET"],
+        labels: ["CPU", "MEMORY", "USO INTERNET"],
         datasets: [
           {
             label: "Estadisticas 👇",
